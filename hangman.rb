@@ -28,13 +28,13 @@ class Hangman
     if data[:wrong_guesses] < 7
       puts 'Pick a letter, or type "save" to save your game and quit'
       input = gets.chomp
-      while (input.length > 1 && input != 'save') || data[:guessed_letters].include?(input)
+      while (input.length > 1 && input != 'save') || data[:guessed_letters].include?(input.downcase)
         puts 'Not a valid input! (Pick a letter you have not chosen, or type "save")'
         input = gets.chomp
       end
       save_game(self) if input.downcase == 'save'
-      data[:guessed_letters] += input
-      send_guess(input)
+      data[:guessed_letters] += input.downcase
+      send_guess(input.downcase)
       start_round
     else
       end_game
